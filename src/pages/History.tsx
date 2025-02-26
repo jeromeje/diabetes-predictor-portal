@@ -10,6 +10,12 @@ import {
 import Header from "@/components/Header";
 
 const History = () => {
+  // TODO: Replace with actual user data from authentication
+  const user = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+  };
+
   // TODO: Fetch actual history from backend
   const mockHistory = [
     {
@@ -38,10 +44,14 @@ const History = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Header />
       <div className="container py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">Assessment History</h1>
+          <p className="text-muted-foreground mt-2">
+            Viewing history for {user.name} ({user.email})
+          </p>
+        </div>
+        
         <div className="bg-white rounded-lg shadow animate-fade-in">
-          <div className="p-6 border-b">
-            <h2 className="text-2xl font-semibold">Assessment History</h2>
-          </div>
           <div className="p-6">
             <Table>
               <TableHeader>

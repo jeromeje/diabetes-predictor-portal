@@ -1,96 +1,79 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
 import Header from "@/components/Header";
+import { Activity, History, LineChart, UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const { toast } = useToast();
-  const [prediction, setPrediction] = useState<boolean | null>(null);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: Implement actual prediction logic
-    const randomPrediction = Math.random() > 0.5;
-    setPrediction(randomPrediction);
-    toast({
-      title: "Prediction Complete",
-      description: randomPrediction
-        ? "Risk of diabetes detected. Please consult a healthcare professional."
-        : "No significant risk detected. Keep maintaining a healthy lifestyle!",
-      variant: randomPrediction ? "destructive" : "default",
-    });
+  // TODO: Replace with actual user data from authentication
+  const user = {
+    name: "John Doe",
+    assessments: 5,
+    lastAssessment: "2024-03-15",
   };
+
+  const dashboardItems = [
+    {
+      title: "New Assessment",
+      description: "Start a new diabetes risk assessment",
+      icon: Activity,
+      link: "/prediction",
+      color: "text-primary",
+    },
+    {
+      title: "Assessment History",
+      description: "View your previous assessments",
+      icon: History,
+      link: "/history",
+      color: "text-blue-500",
+    },
+    {
+      title: "Health Trends",
+      description: "Analyze your health metrics over time",
+      icon: LineChart,
+      link: "/history",
+      color: "text-green-500",
+    },
+    {
+      title: "Profile",
+      description: "Manage your account settings",
+      icon: UserCircle,
+      link: "/profile",
+      color: "text-purple-500",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Header />
       <div className="container py-8">
-        <Card className="max-w-2xl mx-auto animate-fade-in">
-          <CardHeader>
-            <CardTitle>Diabetes Risk Assessment</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="glucose">Glucose Level</Label>
-                  <Input
-                    id="glucose"
-                    type="number"
-                    placeholder="Enter glucose level"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="bloodPressure">Blood Pressure</Label>
-                  <Input
-                    id="bloodPressure"
-                    type="number"
-                    placeholder="Enter blood pressure"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="insulin">Insulin Level</Label>
-                  <Input
-                    id="insulin"
-                    type="number"
-                    placeholder="Enter insulin level"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="bmi">BMI</Label>
-                  <Input id="bmi" type="number" placeholder="Enter BMI" required />
-                </div>
-              </div>
-              <Button type="submit" className="w-full">
-                Predict Risk
-              </Button>
-            </form>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">Welcome back, {user.name}</h1>
+          <p className="text-muted-foreground mt-2">
+            You've completed {user.assessments} assessments. Last check: {user.lastAssessment}
+          </p>
+        </div>
 
-            {prediction !== null && (
-              <div
-                className={`mt-6 p-4 rounded-lg ${
-                  prediction
-                    ? "bg-destructive/10 text-destructive"
-                    : "bg-green-50 text-green-700"
-                }`}
-              >
-                <h3 className="font-semibold">Prediction Result:</h3>
-                <p>
-                  {prediction
-                    ? "Risk of diabetes detected. Please consult a healthcare professional."
-                    : "No significant risk detected. Keep maintaining a healthy lifestyle!"}
-                </p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {dashboardItems.map((item, index) => (
+            <Link to={item.link} key={index}>
+              <Card className="h-full transition-all hover:shadow-lg">
+                <CardContent className="pt-6">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <item.icon className={`w-12 h-12 ${item.color}`} />
+                    <div>
+                      <CardTitle className="mb-2">{item.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

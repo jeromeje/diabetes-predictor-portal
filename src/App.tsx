@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
 import NotFound from "./pages/NotFound";
+import Prediction from "./pages/Prediction";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/prediction" element={<Prediction />} />
           <Route path="/history" element={<History />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
