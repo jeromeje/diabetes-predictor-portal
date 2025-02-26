@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <Header />
       <div className="container px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center animate-slide-up">
           <div className="inline-flex items-center justify-center px-4 py-2 mb-8 text-sm font-medium text-primary-foreground bg-primary rounded-full">

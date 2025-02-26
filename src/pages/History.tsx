@@ -7,8 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 
 const History = () => {
   // TODO: Fetch actual history from backend
@@ -37,20 +36,7 @@ const History = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <nav className="border-b bg-white/50 backdrop-blur-sm">
-        <div className="container flex items-center justify-between h-16">
-          <span className="text-xl font-semibold text-primary">DiabetesPredict</span>
-          <div className="space-x-4">
-            <Link to="/dashboard">
-              <Button variant="ghost">Dashboard</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="ghost">Logout</Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
+      <Header />
       <div className="container py-8">
         <div className="bg-white rounded-lg shadow animate-fade-in">
           <div className="p-6 border-b">
